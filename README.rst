@@ -44,49 +44,49 @@ Examples
 
 This is a simple Model.
 
-::
+.. sourcecode:: pycon
 
-  >>> from schematics.models import Model
-  >>> from schematics.types import StringType, URLType
-  >>> class Person(Model):
-  ...     name = StringType(required=True)
-  ...     website = URLType()
-  ...
-  >>> person = Person({'name': u'Joe Strummer',
-  ...                  'website': 'http://soundcloud.com/joestrummer'})
-  >>> person.name
-  u'Joe Strummer'
+   >>> from schematics.models import Model
+   >>> from schematics.types import StringType, URLType
+   >>> class Person(Model):
+   ...     name = StringType(required=True)
+   ...     website = URLType()
+   ...
+   >>> person = Person({'name': u'Joe Strummer',
+   ...                  'website': 'http://soundcloud.com/joestrummer'})
+   >>> person.name
+   u'Joe Strummer'
 
 Serializing the data to JSON.
 
-::
+.. sourcecode:: pycon
 
-  >>> import json
-  >>> json.dumps(person.to_primitive())
-  {"name": "Joe Strummer", "website": "http://soundcloud.com/joestrummer"}
+   >>> import json
+   >>> json.dumps(person.to_primitive())
+   {"name": "Joe Strummer", "website": "http://soundcloud.com/joestrummer"}
 
 Let's try validating without a name value, since it's required.
 
-::
+.. sourcecode:: pycon
 
-  >>> person = Person()
-  >>> person.website = 'http://www.amontobin.com/'
-  >>> person.validate()
-  Traceback (most recent call last):
-    File "<stdin>", line 1, in <module>
-    File "schematics/models.py", line 231, in validate
-      raise ModelValidationError(e.messages)
-  schematics.exceptions.ModelValidationError: {'name': [u'This field is required.']}
+   >>> person = Person()
+   >>> person.website = 'http://www.amontobin.com/'
+   >>> person.validate()
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "schematics/models.py", line 231, in validate
+       raise ModelValidationError(e.messages)
+   schematics.exceptions.ModelValidationError: {'name': [u'This field is required.']}
 
 Add the field and validation passes
 
-::
+.. sourcecode:: pycon
 
-  >>> person = Person()
-  >>> person.name = 'Amon Tobin'
-  >>> person.website = 'http://www.amontobin.com/'
-  >>> person.validate()
-  >>>
+   >>> person = Person()
+   >>> person.name = 'Amon Tobin'
+   >>> person.website = 'http://www.amontobin.com/'
+   >>> person.validate()
+   >>>
 
 What's with the fork?
 =====================
